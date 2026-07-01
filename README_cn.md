@@ -6,14 +6,21 @@
 
 ## 运行方式
 
-### 1. 编译
+### 1. 下载资源包
+
+```bash
+wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.0.0.tar.gz
+tar -zxvf speech_agent_asr_v1.0.0.tar.gz -C /opt/tros/humble/lib/
+```
+
+### 2. 编译
 
 ```bash
 source /opt/tros/humble/setup.bash
 colcon build --packages-select speech_agent_asr
 ```
 
-### 2. 启动
+### 3. 启动
 
 ```bash
 ros2 launch speech_agent_asr speech_agent_asr.launch.py asr_pub_topic:=/asr_text
@@ -26,7 +33,7 @@ ros2 launch speech_agent_asr speech_agent_asr.launch.py asr_pub_topic:=/prompt_t
 
 运行成功后，节点订阅如下 topic 并发布识别结果。
 
-### 3. 订阅与发布
+### 4. 订阅与发布
 
 | 方向 | Topic | 类型 | 说明 |
 | ---- | ----- | ---- | ---- |

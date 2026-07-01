@@ -6,14 +6,21 @@ English | [简体中文](./README_cn.md)
 
 ## How to Run
 
-### 1. Build
+### 1. DownLoad the resource pack
+
+```bash
+wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.0.0.tar.gz
+tar -zxvf speech_agent_asr_v1.0.0.tar.gz -C /opt/tros/humble/lib/
+```
+
+### 2. Build
 
 ```bash
 source /opt/tros/humble/setup.bash
 colcon build --packages-select speech_agent_asr
 ```
 
-### 2. Launch
+### 3. Launch
 
 ```bash
 ros2 launch speech_agent_asr speech_agent_asr.launch.py asr_pub_topic:=/asr_text
@@ -27,7 +34,7 @@ ros2 launch speech_agent_asr speech_agent_asr.launch.py asr_pub_topic:=/prompt_t
 
 Once running, the node subscribes to the following topics and publishes recognition results.
 
-### 3. Subscriptions and Publications
+### 4. Subscriptions and Publications
 
 | Direction | Topic | Type | Description |
 | --------- | ----- | ---- | ----------- |
