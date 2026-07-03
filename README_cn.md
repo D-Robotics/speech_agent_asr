@@ -2,25 +2,26 @@
 
 # speech_agent_asr
 
-**speech_agent_asr** 提供语音识别（ASR）功能。节点根据 VAD 端点检测事件创建/销毁 ASR 会话，接收降噪后的音频数据，调用 ASR SDK（`libasr_sdk.so`）进行语音识别，并将识别结果（部分结果和最终结果）发布到 ROS2 topic。
+**speech_agent_asr** 提供语音识别（ASR）功能。节点根据 VAD 端点检测事件创建/销毁 ASR 会话，接收降噪后的音频数据，调用 ASR SDK进行语音识别，并将识别结果发布到 ROS2 topic。
 
 ## 运行方式
 
-### 1. 下载资源包
+### 1. 编译
+
+编译时会自动下载资源包，如果想手动下载资源包，可以使用下面命令将资源包下载到项目根目录，再进行编译
 
 ```bash
 wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.0.0.tar.gz
-tar -zxvf speech_agent_asr_v1.0.0.tar.gz -C /opt/tros/humble/lib/
 ```
 
-### 2. 编译
+- 编译
 
 ```bash
 source /opt/tros/humble/setup.bash
 colcon build --packages-select speech_agent_asr
 ```
 
-### 3. 启动
+### 2. 启动
 
 ```bash
 ros2 launch speech_agent_asr speech_agent_asr.launch.py asr_pub_topic:=/asr_text
@@ -33,7 +34,7 @@ ros2 launch speech_agent_asr speech_agent_asr.launch.py asr_pub_topic:=/prompt_t
 
 运行成功后，节点订阅如下 topic 并发布识别结果。
 
-### 4. 订阅与发布
+### 3. 订阅与发布
 
 | 方向 | Topic | 类型 | 说明 |
 | ---- | ----- | ---- | ---- |
@@ -74,3 +75,18 @@ speech_agent_asr
   ├── libspeech_agent_asr_bootstrap.so
   └── libdl
 ```
+
+## 常见问题
+
+### 1. 无识别结果
+
+- 确认speech_agent_audio节点发送的音频数据是否正常
+- 确认speech_agent_audio节点是否发送VAD BEGIN事件
+
+### 2. 句首截断
+
+- 确认是否唤醒词后的停顿时间是否过短
+
+### 3. 句尾截断
+
+- 确认语句中间的停顿时间是否过长
