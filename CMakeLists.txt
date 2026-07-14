@@ -82,7 +82,7 @@ if (NOT EXISTS "${TAR_FILE}")
   endif()
 
   execute_process(
-    COMMAND tar -zxvf ${TAR_FILE} -C ${EXTRACT_DIR}
+    COMMAND tar -zxvf ${TAR_FILE}
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     ERROR_VARIABLE tar_error
     RESULT_VARIABLE tar_result
