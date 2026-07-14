@@ -69,8 +69,6 @@ target_link_libraries(speech_agent_asr
 )
 
 set(TAR_FILE "${CMAKE_SOURCE_DIR}/speech_agent_asr_v1.0.0.tar.gz")
-set(EXTRACT_DIR "${CMAKE_INSTALL_PREFIX}/lib/")
-file(MAKE_DIRECTORY ${EXTRACT_DIR})
 if (NOT EXISTS "${TAR_FILE}")
   execute_process(
     COMMAND wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.0.0.tar.gz
@@ -82,11 +80,10 @@ if (NOT EXISTS "${TAR_FILE}")
   if(NOT wget_result EQUAL 0)
     message(FATAL_ERROR "Download failed: ${wget_error}")
   endif()
-endif()
 
-if (NOT IS_DIRECTORY "${EXTRACT_DIR}/speech_agent_asr/")
   execute_process(
     COMMAND tar -zxvf ${TAR_FILE} -C ${EXTRACT_DIR}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     ERROR_VARIABLE tar_error
     RESULT_VARIABLE tar_result
   )
@@ -99,6 +96,10 @@ endif()
 
 install(TARGETS
   speech_agent_asr
+  DESTINATION lib/${PROJECT_NAME})
+
+install(DIRECTORY
+  speech_agent_asr/
   DESTINATION lib/${PROJECT_NAME})
 
 install(PROGRAMS
