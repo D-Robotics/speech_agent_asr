@@ -8,8 +8,6 @@
 
 ### 1. Build
 
-- Build
-
 ```bash
 source /opt/tros/humble/setup.bash
 colcon build --packages-select speech_agent_asr
@@ -17,7 +15,7 @@ colcon build --packages-select speech_agent_asr
 
 ### 2. Launch
 
-Manually download resource package and decompress to /opt/tros/humble/lib
+Manually download resource package and decompress to `/opt/tros/humble/lib`
 
 ```bash
 wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.0.0.tar.gz
