@@ -8,12 +8,6 @@
 
 ### 1. Build
 
-The resource package is downloaded automatically during the build. To download it manually, use the following command to download the resource package to the project root directory before building:
-
-```bash
-wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.0.0.tar.gz
-```
-
 - Build
 
 ```bash
@@ -22,6 +16,15 @@ colcon build --packages-select speech_agent_asr
 ```
 
 ### 2. Launch
+
+Manually download resource package and decompress to /opt/tros/humble/lib
+
+```bash
+wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.0.0.tar.gz
+tar -zxvf speech_agent_asr_v1.0.0.tar.gz -C /opt/tros/humble/lib/
+```
+
+- launch
 
 ```bash
 ros2 launch speech_agent_asr speech_agent_asr.launch.py asr_pub_topic:=/asr_text

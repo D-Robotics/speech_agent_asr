@@ -8,12 +8,6 @@
 
 ### 1. 编译
 
-编译时会自动下载资源包，如果想手动下载资源包，可以使用下面命令将资源包下载到项目根目录，再进行编译
-
-```bash
-wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.0.0.tar.gz
-```
-
 - 编译
 
 ```bash
@@ -22,6 +16,15 @@ colcon build --packages-select speech_agent_asr
 ```
 
 ### 2. 启动
+
+手动下载资源包，并解压到/opt/tros/humble/lib目录下
+
+```bash
+wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.0.0.tar.gz
+tar -zxvf speech_agent_asr_v1.0.0.tar.gz -C /opt/tros/humble/lib/
+```
+
+- 启动
 
 ```bash
 ros2 launch speech_agent_asr speech_agent_asr.launch.py asr_pub_topic:=/asr_text
