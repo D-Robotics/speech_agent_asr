@@ -70,7 +70,7 @@ class SpeechAgentASRNode {
   std::atomic<bool> feed_audio_flag_{false};
   std::atomic<bool> session_inited_flag_{false};
   std::queue<std::vector<uint8_t>> fill_queue_;
-  const std::size_t MAX_FILL_QUEUE_SIZE_{2};  // 回溯2帧asr数据，共160ms
+  const std::size_t MAX_FILL_QUEUE_SIZE_{3};  // 回溯3帧asr数据，共240ms
   sa_asr_handle asr_handle_;
   sa_asr_create_t p_sa_asr_create_ = nullptr;
   sa_asr_write_t p_sa_asr_write_ = nullptr;

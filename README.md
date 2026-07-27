@@ -8,18 +8,20 @@
 
 ### 1. Build
 
+`<TROS_DISTRO>` is the active TROS distribution — `humble` or `jazzy`. Replace it with the distro you have installed and sourced.
+
 ```bash
-source /opt/tros/humble/setup.bash
+source /opt/tros/<TROS_DISTRO>/setup.bash
 colcon build --packages-select speech_agent_asr
 ```
 
 ### 2. Launch
 
-Manually download resource package and decompress to `/opt/tros/humble/lib`
+Manually download resource package and decompress to `/opt/tros/${TROS_DISTRO}/lib`
 
 ```bash
-wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.0.0.tar.gz
-tar -zxvf speech_agent_asr_v1.0.0.tar.gz -C /opt/tros/humble/lib/
+wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.1.0.tar.gz
+tar -zxvf speech_agent_asr_v1.1.0.tar.gz -C /opt/tros/${TROS_DISTRO}/lib/
 ```
 
 - launch

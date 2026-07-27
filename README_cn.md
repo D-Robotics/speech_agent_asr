@@ -8,18 +8,20 @@
 
 ### 1. 编译
 
+`<TROS_DISTRO>` 为当前启用的 TROS 发行版 —— `humble` 或 `jazzy`，请替换为实际安装并 source 的发行版。
+
 ```bash
-source /opt/tros/humble/setup.bash
+source /opt/tros/<TROS_DISTRO>/setup.bash
 colcon build --packages-select speech_agent_asr
 ```
 
 ### 2. 启动
 
-手动下载资源包，并解压到`/opt/tros/humble/lib`目录下
+手动下载资源包，并解压到`/opt/tros/${TROS_DISTRO}/lib`目录下
 
 ```bash
-wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.0.0.tar.gz
-tar -zxvf speech_agent_asr_v1.0.0.tar.gz -C /opt/tros/humble/lib/
+wget https://archive.d-robotics.cc/TogetheROS/files/speech_solution/speech_agent_asr/speech_agent_asr_v1.1.0.tar.gz
+tar -zxvf speech_agent_asr_v1.1.0.tar.gz -C /opt/tros/${TROS_DISTRO}/lib/
 ```
 
 - 启动
