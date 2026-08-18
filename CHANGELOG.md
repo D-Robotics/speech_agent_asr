@@ -1,5 +1,9 @@
 # Changelog for package speech_agent_asr
 
+tros_1.2.0(2026-08-17)
+------------------
+1. 更新launch文件，启动时输出示例日志
+
 tros_1.1.0(2026-07-27)
 ------------------
 1. 同时支持humble和jazzy版本

@@ -14,7 +14,7 @@
 # limitations under the License.
 
 from launch import LaunchDescription
-from launch.actions import ExecuteProcess, DeclareLaunchArgument
+from launch.actions import ExecuteProcess, DeclareLaunchArgument, LogInfo
 from launch.substitutions import LaunchConfiguration
 from ament_index_python.packages import get_package_share_directory
 
@@ -39,6 +39,31 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'asr_pub_topic', default_value='/asr_text',
             description='ASR result publication topic'),
+
+        LogInfo(
+            msg=["\n",
+                 "========== speech_agent_asr.launch.py usage ==========\n",
+                 "usage:\n",
+                 "  ros2 launch speech_agent_asr speech_agent_asr.launch.py ",
+                 "[<argument_name>:=<value> ...]\n",
+                 "\n",
+                 "arguments (all optional, pass as <name>:=<value>):\n",
+                 "  vad_sub_topic  VAD data subscription topic,       default: '/vad_data'\n",
+                 "  asr_sub_topic  ASR audio data subscription topic, default: '/asr_data'\n",
+                 "  asr_pub_topic  ASR result publication topic,      default: '/asr_text'\n",
+                 "\n",
+                 "examples:\n",
+                 "  # launch with all default values\n",
+                 "  ros2 launch speech_agent_asr speech_agent_asr.launch.py\n",
+                 "  # launch with a different ASR result publication topic\n",
+                 "  ros2 launch speech_agent_asr speech_agent_asr.launch.py ",
+                 "asr_pub_topic:=/prompt_text\n",
+                 "\n",
+                 "current values:\n",
+                 "  vad_sub_topic=", vad_sub_topic, "\n",
+                 "  asr_sub_topic=", asr_sub_topic, "\n",
+                 "  asr_pub_topic=", asr_pub_topic, "\n",
+                 "=======================================================\n"]),
 
         ExecuteProcess(
             cmd=['bash', '-c',
