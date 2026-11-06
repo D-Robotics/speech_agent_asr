@@ -52,6 +52,7 @@ class SpeechAgentASRNode {
   typedef int (*sa_asr_write_t)(sa_asr_handle, const void*, size_t);
   typedef int (*sa_asr_finish_t)(sa_asr_handle);
   typedef void (*sa_asr_destroy_t)(sa_asr_handle);
+  typedef int (*sa_asr_reset_t)(sa_asr_handle);
 
   void VadDataMessageCallback(const audio_msg::msg::SmartAudioData::SharedPtr msg);
 
@@ -60,6 +61,8 @@ class SpeechAgentASRNode {
   static void AsrResultCallback(const char* text, int is_final, void* user_data);
 
   void CreateAsrSession();
+
+  void FinishAsrSession();
 
   void DestroyAsrSession();
 
@@ -76,6 +79,7 @@ class SpeechAgentASRNode {
   sa_asr_write_t p_sa_asr_write_ = nullptr;
   sa_asr_finish_t p_sa_asr_finish_ = nullptr;
   sa_asr_destroy_t p_sa_asr_destroy_ = nullptr;
+  sa_asr_reset_t p_sa_asr_reset_ = nullptr;
   LIB_HANDLE lib_handle_ = nullptr;
 };
 

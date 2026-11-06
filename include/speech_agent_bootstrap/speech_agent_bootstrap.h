@@ -97,16 +97,47 @@ int speech_agent_vad_deinit(void *handle);
 // ============================================================================
 
 /**
+ * Options for speech_agent_asr_init_ex (asr-sdk >= 1.0.1).
+ * Zero-initialize the struct and only set what you need; zero values select
+ * SDK defaults and keep the pre-1.0.1 behavior (no punctuation / ITN / hotwords).
+ */
+typedef struct {
+  int num_threads;           /**< Inference threads, 0 = SDK decides (default 4) */
+  const char *cpu_affinity;  /**< CPU affinity, e.g. "0-3" or "0,1,2,3"; NULL = no binding */
+  int enable_punct;          /**< Punctuation on final results (needs punct model), 0 = off */
+  int enable_itn;            /**< Chinese inverse text normalization, 0 = off */
+  const char *hotwords_file; /**< Hotwords JSON path; NULL = disabled */
+  float hotwords_score;      /**< Hotwords boost 1.5-3.0; <=0 falls back to 2.0 */
+  const char *auth_uri;      /**< Auth server URI override; NULL = SDK default server.
+                                  Only for deployments whose network cannot reach the
+                                  default auth server (e.g. intranet with an auth proxy) */
+} speech_agent_asr_options_t;
+
+/**
  * @brief Initialize the ASR SDK.
  *
  * Loads libasr_sdk.so, builds sa_config_t with embedded credentials,
- * and calls sa_init().
+ * and calls sa_init(). Equivalent to speech_agent_asr_init_ex(path, NULL).
  *
  * @param resource_path  [in]  Path to ASR resources (e.g. "/opt/tros/humble/lib/speech_agent_asr")
  * @return LIB_HANDLE on success, NULL on failure.
  *         The caller uses this handle to dlsym sa_asr_create, sa_asr_write, etc.
  */
 void *speech_agent_asr_init(const char *resource_path);
+
+/**
+ * @brief Initialize the ASR SDK with extended options (asr-sdk >= 1.0.1).
+ *
+ * Same as speech_agent_asr_init, plus explicit control over the sa_config_t
+ * fields introduced in asr-sdk 1.0.1 (threads / cpu affinity / punctuation /
+ * ITN / hotwords). sample_rate is fixed at 16000 by the pipeline.
+ *
+ * @param resource_path  [in]  Path to ASR resources
+ * @param options        [in]  Options struct, or NULL for all defaults
+ * @return LIB_HANDLE on success, NULL on failure
+ */
+void *speech_agent_asr_init_ex(const char *resource_path,
+                               const speech_agent_asr_options_t *options);
 
 /**
  * @brief Deinitialize the ASR SDK.
