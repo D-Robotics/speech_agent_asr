@@ -234,10 +234,10 @@ void SpeechAgentASRNode::AsrDataMessageCallback(const audio_msg::msg::SmartAudio
 void SpeechAgentASRNode::AsrResultCallback(const char* text, int is_final, void* user_data) {
   SpeechAgentASRNode* self = static_cast<SpeechAgentASRNode*>(user_data);
   if (text && text[0]) {
-    auto asr_msg = std::make_unique<std_msgs::msg::String>();
-    asr_msg->data = text;
-    self->asr_msg_publisher_->publish(std::move(asr_msg));
     if (is_final) {
+      auto asr_msg = std::make_unique<std_msgs::msg::String>();
+      asr_msg->data = text;
+      self->asr_msg_publisher_->publish(std::move(asr_msg));
       RCLCPP_WARN(self->nh_->get_logger(), "asr final data callback:%s, %s", text, getSysTimeMs().c_str());
     } else {
       RCLCPP_WARN(self->nh_->get_logger(), "asr partial data callback:%s, %s", text, getSysTimeMs().c_str());
